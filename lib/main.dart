@@ -47,7 +47,6 @@ Future<void> readJson() async {
     final data = await json.decode(response);
     setState(() {
       _items = data;
-      print(_items[0]['username']);
     });
   }
 
@@ -55,14 +54,7 @@ Future<void> readJson() async {
 
   @override
   Widget build(BuildContext context) {
-    
-    // String fName ="James";
-    // String lName = "Brigs";
-    // String username = "james1996";
-    // String status ="Online";
-    // String lastseen = "9.30AM";
-    
-    // int messageLeft = 4;
+ 
 
     return Scaffold(
       appBar: AppBar(
@@ -71,7 +63,7 @@ Future<void> readJson() async {
       ),
       body: SafeArea(
             child: ListView.builder(
-      itemCount: 5,
+      itemCount: 20,
       itemBuilder: (BuildContext context, int index) {
         return Container(
           padding: const EdgeInsets.all(8),
@@ -81,7 +73,7 @@ Future<void> readJson() async {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-               child: _items[index]["avatar"] == null ? Image.network(defaultimage, fit:BoxFit.fill) : Image(image: _items[index]["avatar"], fit:BoxFit.fill),
+               child: _items[index]["avatar"] == null ? Image.network(defaultimage, height: 80, width: 80, fit:BoxFit.fill) : Image.network(_items[index]["avatar"], fit:BoxFit.fill),
               ),
               SizedBox(width: 5),
               Container(  
@@ -112,7 +104,7 @@ Future<void> readJson() async {
                       child: Text(_items[index]["username"], style: TextStyle(fontWeight: FontWeight.bold),),
                     ),
                     Container(
-                      child: Text(_items[index]["status"], style: TextStyle(fontWeight: FontWeight.bold),),
+                      child: _items[index]["status"] == null ? Text("") : Text(_items[index]["status"], style: TextStyle(fontWeight: FontWeight.bold),),
                     )
                   ],
                 ),
